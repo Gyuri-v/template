@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>YTPlayer2-확장.유튜브내용 가져오기</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.8/jquery.mb.YTPlayer.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.8/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="contents">
+            <h1 class="title">📚 YTPlayer2-확장.유튜브내용 가져오기</h1>
+			<div class="videoWrap">
+				<div id="bgndVideo" class="player"></div>
+			</div>
+			<div id="videoData" class="videoData">
+				<div class="dida"></div>
+			</div>
+			<div id="debug" style="display: none">
+				<h2 style="color: #FFFFFF; text-align: left">Events console: </h2>
+				<div id="eventListener"></div>
+			</div>
+		</div>
+	</div>	
+</body>
+<style>
+    
+	.wrap{ padding: 100px 0  }
+	.contents{ display: block; max-width: 760px; margin: 0 auto; padding: 4vw; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); }
+    .title{ margin-bottom: 20px; font-size: 24px; font-weight: 600; color: #000; }
+	.videoWrap{ width: 100%; }
+	.videoData{ width: 100%; margin-top: 20px; padding-left: 0; min-height: 250px; }
+	.videoTit{ font-size: 20px; } 
+	.videoChannel{ font-size: 14px; color: cornflowerblue; }
+	.videoDesc{ font-size: 15px; }
+</style>
+<script>
+$(document).ready(function(){
+    // yt player
+	// 유튜브 api app key -- ip 제한 완료 
+    jQuery.mbYTPlayer.apiKey = "AIzaSyD0DhWavSkpQ3m1KFCo43TJUYkoJua7kF8";
+    var myPlayer;
+    jQuery(function () {
+        myPlayer = jQuery("#bgndVideo").YTPlayer({
+            videoURL: '3wRQW-W9Dio',
+            containment:'self',
+            autoPlay:true, 
+            mute:true, 
+            startAt:0, 
+            opacity:1, 
+            loop:false, 
+            showControls:true, 
+            useOnMobile:true, 
+            stopMovieOnBlur :false 
+        });
+
+        /* DEBUG ******************************************************************************************/
+        var YTPConsole = jQuery("#eventListener");
+        // EVENTS: YTPReady YTPStart YTPEnd YTPPlay YTPLoop YTPPause YTPBuffering YTPMuted YTPUnmuted YTPChangeVideo
+        myPlayer.on("YTPReady YTPStart YTPEnd YTPPlay YTPLoop YTPPause YTPBuffering YTPMuted YTPUnmuted YTPChangeVideo", function (e) {
+            YTPConsole.append("event: " + e.type + " (" + jQuery("#bgndVideo").YTPGetPlayer().getPlayerState() + ") > time: " + e.time);
+            YTPConsole.append("<br>");
+        });
+
+        // EVENT: YTPChanged
+        myPlayer.on("YTPChanged", function (e) {
+            YTPConsole.html("");
+        });
+
+        myPlayer.on("YTPChangeVideo", function(e){});
+
+        // EVENT: YTPData
+        myPlayer.on("YTPData", function (e) {
+
+            if(!e.prop.title)
+                return;
+            $(".dida").html("<p class='videoTit'>" + e.prop.title + "</p> <p class='videoChannel'>@" + e.prop.channelTitle + "</p> <p class='videoDesc'>" + e.prop.description.replace(/\n/g, "<br/>") + "</p>");
+            $("#videoData").show();
+
+            YTPConsole.append("******************************");
+            YTPConsole.append("<br>");
+            YTPConsole.append(e.type);
+            YTPConsole.append("<br>");
+            YTPConsole.append(e.prop.title);
+            YTPConsole.append("<br>");
+            YTPConsole.append(e.prop.description.replace(/\n/g, "<br/>"));
+            YTPConsole.append("<br>");
+            YTPConsole.append("******************************");
+            YTPConsole.append("<br>");
+        });
+
+        // EVENT: YTPTime
+        myPlayer.on("YTPTime", function (e) {
+            var currentTime = e.time;
+            var traceLog = currentTime / 5 == Math.floor(currentTime / 5);
+
+            if (traceLog && YTPConsole.is(":visible")) {
+                YTPConsole.append(myPlayer.attr("id")+ " > " + e.type + " > actual time is: " + currentTime);
+                YTPConsole.append("<br>");
+
+                if(myPlayer.YTPGetFilters())
+                    console.debug("filters: ", myPlayer.YTPGetFilters());
+            }
+        });
+        /* END DEBUG ******************************************************************************************/
+    });
+
+    /*
+     * @param val
+     * @returns {*|number}
+     */
+    function checkForVal(val){
+        return val || 0;
+    }
+})
+
+</script>
+</html>
