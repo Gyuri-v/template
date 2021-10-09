@@ -253,6 +253,64 @@
     </div>
 </div>
 
+<div class="wrap">
+    <h4 class="title">7. 라인을 따라 움직이는 원 애니메이션</h4>
+    <div class="svg_item svg_item07">
+		<style>
+			.svg_item07{ display: flex; justify-content: center; align-items: center; }
+			.svg_item07 .layerWrap{ position: relative; width: 60%; height: 100%; transform: scale(0.8); }
+			.svg_item07 .layerWrap .layer{ position: absolute; top: 55%; right: 0; transform: translateY(-50%); width: 600px; }
+			.svg_item07 .layerWrap .layer3{ right: -9vw; }
+			.svg_item07 .layerWrap svg{ overflow: visible; }
+			.svg_item07 .layerWrap .layer1 svg{ transform: scale(0.0); transition: all 1.5s;  }
+			.svg_item07 .layerWrap .layer2 svg{ transform: scale(0.0); transition: all 1.5s;  }
+			.svg_item07 .layerWrap .layer3{ overflow: hidden; width: 0; height: 659px; transition: all 1.5s; }
+			.svg_item07 .layerWrap .layer3 svg{ position: absolute; top: 0; left: 0; }
+			.svg_item07.active .layerWrap .layer1 svg{ transform: scale(1.0); }
+			.svg_item07.active .layerWrap .layer2 svg{ transform: scale(1.0); }
+			.svg_item07.active .layerWrap .layer3{ width: 838px; }
+		</style>
+		<div class="layerWrap">
+			<div class="layer layer1">
+				<svg 
+				 xmlns="http://www.w3.org/2000/svg"
+				 xmlns:xlink="http://www.w3.org/1999/xlink"
+				 width="661.5px" height="661.5px">
+					<path fill-rule="evenodd"  stroke="rgb(221, 221, 221)" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+					d="M330.500,0.500 C512.754,0.500 660.500,148.246 660.500,330.500 C660.500,512.754 512.754,660.500 330.500,660.500 C148.246,660.500 0.500,512.754 0.500,330.500 C0.500,148.246 148.246,0.500 330.500,0.500 Z"/>
+					<circle r="7" fill="#ae0d15">
+						<animateMotion dur="15s" repeatCount="indefinite" path="M330.500,0.500 C512.754,0.500 660.500,148.246 660.500,330.500 C660.500,512.754 512.754,660.500 330.500,660.500 C148.246,660.500 0.500,512.754 0.500,330.500 C0.500,148.246 148.246,0.500 330.500,0.500 Z" />
+					</circle>
+				</svg>
+			</div>
+			<div class="layer layer2">
+				<svg 
+				 xmlns="http://www.w3.org/2000/svg"
+				 xmlns:xlink="http://www.w3.org/1999/xlink"
+				 width="511.5px" height="804.5px">
+					<path fill-rule="evenodd"  stroke="rgb(221, 221, 221)" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+					d="M491.305,5.112 C543.949,36.378 481.122,239.365 350.977,458.496 C220.832,677.628 72.652,829.923 20.008,798.656 C-32.636,767.390 30.191,564.403 160.336,345.272 C290.481,126.141 438.661,-26.154 491.305,5.112 Z"/>
+					<circle r="7" fill="#ae0d15">
+						<animateMotion dur="12s" repeatCount="indefinite" path="M491.305,5.112 C543.949,36.378 481.122,239.365 350.977,458.496 C220.832,677.628 72.652,829.923 20.008,798.656 C-32.636,767.390 30.191,564.403 160.336,345.272 C290.481,126.141 438.661,-26.154 491.305,5.112 Z" />
+					</circle>
+				</svg>
+			</div>
+			<div class="layer layer3">
+				<svg 
+				 xmlns="http://www.w3.org/2000/svg"
+				 xmlns:xlink="http://www.w3.org/1999/xlink"
+				 width="838px" height="659px">
+					<path fill-rule="evenodd"  fill="rgb(221, 221, 221)"
+					d="M0.735,0.746 L837.882,657.466 L837.265,658.253 L0.118,1.533 L0.735,0.746 Z"/>
+					<circle r="7" fill="#ae0d15">
+						<animateMotion dur="10s" repeatCount="indefinite" path="M0.735,0.746 L837.882,657.466 L837.265,658.253 L0.118,1.533 L0.735,0.746 Z" />
+					</circle>
+				</svg>
+			</div>
+		</div>
+    </div>
+</div>
+
 
 <script>
     $(function(){
