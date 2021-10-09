@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<!--
+******************************
+
+카카오맵 지도에 길찾아가는 path animation 템플릿
+******************************
+-->
+<head>
+	<meta charset="UTF-8">
+	<title>카카오맵 길찾기 animation</title>
+
+	<style>
+	@font-face {
+		font-family: 'GmarketSansBold';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: 'GmarketSansMedium';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	html, body{ margin: 0; padding: 0;}
+	.container{ display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; }
+	.contents{ width: 100%; max-width: 1000px; }
+	.title{ margin: 0; margin-bottom: 30px; font-family: 'GmarketSansBold'; font-size: 40px; font-weight: 600; color: #333; text-align: center; }
+	.text{ margin: 0; margin-top: 20px; font-family: 'GmarketSansMedium'; font-size: 17px; font-weight: 400; color: #333; text-align: center; }
+	.text a{ color: #ee2b2b; }
+	.text a:hover{ color: #b60005; }
+	.mapBox{ width: 100%; padding: 50px 50px 20px; box-sizing: border-box; background: #fff; border-radius: 30px; box-shadow: 0 20px 80px rgba(0,0,0,0.15); }
+	.mapBox .root_daum_roughmap{ width: 100%; height: 100%;  }
+	.mapBox .root_daum_roughmap .wrap_map{ height: 100%; }
+	.mapBox #daum-maps-shape-0{ stroke-dasharray: var(--pathLength); stroke-dashoffset: var(--pathLength); animation: strokeAni 3s both linear; }
+	@keyframes strokeAni{
+		0%{ stroke-dashoffset: var(--pathLength); }
+		100%{ stroke-dashoffset: 0; }
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="contents">
+			<h2 class="title"> 🚩 카카오맵 길찾기 애니메이션</h2>
+			<div class="mapBox">
+				<div id="map" style="width:100%;height:400px;"></div>
+				<p class="text">지도 좌표값은 <a href="https://tablog.neocities.org/keywordposition.html" target="_blank">요기</a>에서 😉</p>
+			</div>
+		</div>
+	</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 카카오맵 api 키값입니다 - 등록된 사이트만 나오기때문에 타사이트에는 키값 새로 발급받아 사용하셔야합니다! (현재 박규리 개인계정) -->
+<script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?appkey=dd1ecd67682d474d740f045569ef53e9'></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+		center: new kakao.maps.LatLng(37.555347620328035, 126.92038265473496), // 지도의 중심좌표
+		 // draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
+		level: 3 // 지도의 확대 레벨
+	};
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
+// 버튼 클릭에 따라 지도 확대, 축소 기능을 막거나 풀고 싶은 경우에는 map.setZoomable 함수를 사용합니다
+map.setZoomable(true);
+
+// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(37.555268064836795, 126.91932457127115 ); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+	position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+
+
+/*** 지도 길찾기 라인 ***/
+// 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+var linePath = [
+	new kakao.maps.LatLng(37.55625008458588, 126.92258859822104),
+	new kakao.maps.LatLng(37.555255856327214, 126.92125984343201),
+	new kakao.maps.LatLng(37.55552597013212, 126.92098228427209),
+	new kakao.maps.LatLng(37.554662479814525, 126.91981752292268),
+	new kakao.maps.LatLng(37.55516215129859, 126.91925678170976),
+	new kakao.maps.LatLng(37.55523201336524, 126.91930763418507),
+];
+
+// 지도에 표시할 선을 생성합니다
+var polyline = new kakao.maps.Polyline({
+	path: linePath, // 선을 구성하는 좌표배열 입니다
+	strokeWeight: 5, // 선의 두께 입니다
+	strokeColor: '#ee2b2b', // 선의 색깔입니다
+	strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	strokeStyle: 'solid' // 선의 스타일입니다
+});
+
+	
+// 지도에 선을 표시합니다 
+polyline.setMap(map); 
+
+var docStyle = document.documentElement.style;
+var pathLength = document.querySelector('#daum-maps-shape-0').getTotalLength();
+docStyle.setProperty('--pathLength', pathLength);
+</script>
+</body>
+</html>
