@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>svg01</title>
+	<title>스와이퍼 슬라이드</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
 	<style>
         @font-face {
@@ -13,21 +16,114 @@
         font-weight: normal;
         font-style: normal;
     }
+    *{ box-sizing: border-box; }
     body{ font-family: 'KOTRA_BOLD-Bold'; }
     .hdtext{ margin: 20px auto; font-size: 17px; font-weight: 300; text-align: center; }
-    .wrap{ overflow: hidden; width: 100%; padding: 100px 20px; box-sizing: border-box; }
+    .item{ overflow: hidden; width: 100%; padding: 100px 20px; box-sizing: border-box; }
     .title{ width: 100%; max-width: 1200px; margin: 30px auto; font-size: 36px; }
-    .item{ overflow: hidden; width: 100%; max-width: 1200px; height: 600px; margin: auto; border-radius: 40px; box-shadow: 0 0 40px rgba(0,0,0,0.1); }
+    .itemCont{ overflow: hidden; width: 100%; max-width: 1200px; height: 600px; margin: auto; border-radius: 40px; box-shadow: 0 0 40px rgba(0,0,0,0.1); }
+    .bgcst{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-repeat: no-repeat; }
+
+    /* item1 */
+    .item1{ position: relative; }
+    .item1 .itemCont{ position: relative; } 
+    .item1 .swiper-container{ width: 100%; height: 100%; }
+    .item1 .swiper-slide{ position: relative; overflow: hidden; background: #000; }
+    .item1 .swiper-slide .bg{ opacity: 0.7;; transform: scale(1.1); }
+    .item1 .swiper-slide .inner{ display: flex; align-items: flex-end; height: 100%; padding: 100px 20px; }
+    .item1 .swiper-slide .title{ opacity: 0; transform: translateY(30px); font-size: 40px; font-weight: 300; color: #fff; line-height: 1.3; transition: all 1s; }
+    .item1 .swiper-slide-active .bg{ transform: scale(1.0); transition: all 2s; }
+    .item1 .swiper-slide-active .title{ opacity: 1; transform: translateY(0); }
+    .item1 .slideNav{ position: absolute; bottom: 0; left: 0; z-index: 99; width: 100%; }
+    .item1 .slideNav .inner{ overflow: hidden; position: relative; padding: 20px; }
+    .item1 .slideNav .progress{ position: absolute; top: 0; left: 20px; width: calc(100% - 40px); height: 1px; background: #fff; }
+    .item1 .slideNav .progress::after{ content: ''; position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fb715a; }
+    .item1 .slideNav .progress.on::after{ animation: slideProgress 4s both linear; }
+    .item1 .slideNav .navBox{ float: right; position: relative; width: 160px; height: 35px; }
+    .item1 .slideNav .swiper-button-prev{ z-index: 3; top: 0; left: 0; margin-top: 0; }  
+    .item1 .slideNav .swiper-button-next{ z-index: 3; top: 0; right: 0; margin-top: 0; }  
+    .item1 .slideNav .swiper-button-prev::after,
+    .item1 .slideNav .swiper-button-next::after{ font-size: 20px; font-weight: 600; color: #fff;  }
+    .item1 .slideNav .swiper-button-prev:hover{ background: url('/images/common/ico_arwCircle_c.png') no-repeat center; }
+    .item1 .slideNav .swiper-button-next:hover{ background: url('/images/common/ico_arwCircle_c.png') no-repeat center; }
+    .item1 .slideNav .swiper-pagination{ z-index: -1; top: 10px; left: 50%; transform: translateX(-50%); font-size: 17px; font-weight: 500; color: #fff; }
+    @keyframes slideProgress{
+        from{ width: 0; }
+        to{ width: 100%; }
+    }
+
 	</style>
 </head>
 <body>
-<div class="hdtext">* swiper.js 를 활용하여 여러예제를 담았습니다 *</div>
-<div class="wrap">
+<p class="hdtext">* swiper.js 를 활용하여 여러예제를 담았습니다 *</p>
+<div class="item item1">
     <h4 class="title">1. 슬라이드 프로그레스</h4>
-	<div class="item item1">
-	</div>
-</div>
-</div>
+	<div class="itemCont">
+        <div class="slideContainer swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="bg bgcst" style="background-image: url('../images/contents/vis_bg1.jpg')"></div>
+					<div class="inner">
+						<h2 class="title">
+							프로그레스 슬라이드 1
+						</h2>
+					</div>
+				</div><!-- .swiper-slide -->
+				<div class="swiper-slide">
+					<div class="bg bgcst" style="background-image: url('../images/contents/vis_bg2.jpg')"></div>
+					<div class="inner">
+						<h2 class="title">
+							프로그레스 슬라이드 2
+						</h2>
+					</div>
+				</div><!-- .swiper-slide -->
+			</div>
+		</div><!-- .swiper-conatainer -->
+		<div class="slideNav">
+			<div class="inner">
+				<div class="progress on"></div>
+				<div class="navBox">
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+		</div><!-- slideNav -->
+	</div><!-- .itemCont -->
+    <script>
+        var item1Slide = new Swiper(".item1 .swiper-container", {
+            navigation: {
+                nextEl: ".item1 .swiper-button-next",
+                prevEl: ".item1 .swiper-button-prev",
+            },
+            pagination: {
+                el: ".item1 .swiper-pagination",
+                type: "fraction",
+            },
+            autoplay: {
+                delay: 4300,
+                disableOnInteraction: false,
+            },
+        });
+        item1Slide.on('slideChange', function () {
+            $('.item1 .slideNav .progress').removeClass('on');
+            setTimeout(function(){
+                $('.item1 .slideNav .progress').addClass('on');
+            },300);
+        });
+        $(".item1 .slideNav .sideTxt").each(function(){
+            var typingIdx=0; 
+            var typingTxt = $(this).text();
+            //typingTxt = typingTxt.replace(/(\s*)/g, "");
+            typingTxt = typingTxt.split("");
+            $(this).text("");
+            for(var i=0; i<typingTxt.length; i++){
+                $(this).append("<i>" + (typingTxt[typingIdx]) + "</i>");
+                typingIdx++;
+            }
+        });
+    </script>
+</div><!-- .item1 -->
 
 
 </body>
