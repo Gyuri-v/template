@@ -9,8 +9,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-	<style>
-        @font-face {
+	<style> 
+    @font-face {
         font-family: 'KOTRA_BOLD-Bold';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
         font-weight: normal;
@@ -52,11 +52,48 @@
         to{ width: 100%; }
     }
 
+    /* item2 */
+    .item2 .itemCont{ position: relative; height: 890px; }
+    .item2 .swiper-container{ overflow: visible; width: 100%; height: 100%; }
+    .item2 .swiper-slide{ display: flex; align-items: center; position: relative; }  
+    .item2 .swiper-slide .txtBox{ padding: 40px; }
+    .item2 .swiper-slide .paging{ margin-bottom: 40px; font-size: 20px; font-weight: 500; color: #ddd;  }
+    .item2 .swiper-slide .paging strong{ font-size: 1.5em; color: #fff; }
+    .item2 .swiper-slide .tit{ margin-bottom: 30px; font-size: 45px; font-weight: 600; color: #fff; line-height: 1.2; } 
+    .item2 .swiper-slide .txt{ margin-bottom: 40px; font-size: 20px; font-weight: 400; color: #fff; line-height: 1.4; }
+    .item2 .swiper-slide .bgBox{ display: flex; justify-content: center; align-items: center; position: absolute; top: 50%; right: 13%; transform: translateY(-50%); width: 50%; height: 67vh; box-shadow: 20px 20px 40px rgb(0 0 0 / 33%); transition: background 0.5s 0.3s; }
+    .item2 .swiper-slide .bgBox .topTxt{ position: absolute; top: -35px; left: 0; font-size: 30px; font-weight: 500; color: #fff; line-height: 1; }
+    .item2 .swiper-slide .bgBox .innerTxt{ overflow: hidden; transform: rotate(-15deg); font-size: 100px; font-weight: 400; color: #fff; line-height: 0.85; letter-spacing: 1px; }  
+    .item2 .swiper-slide .bgBox .innerTxt span{ display: block; padding: 30px; transform: translate(0, 100%); transition: all 1.5s; }
+    .item2 .swiper-slide-next .bgBox{ right: auto; left: 0; }
+    .item2 .swiper-slide-active .bgBox{ background: rgba(255,255,255,0.1) !important; }
+    .item2 .swiper-button-prev{ left: -100px; width: 60px; height: 60px; border-radius: 50%; box-shadow: rgba(0,0,0,0.1); background: url('../images/contents/ico_prev1.png') no-repeat center; }
+    .item2 .swiper-button-prev::after{ content: '';  }
+    .item2 .swiper-button-next{ right: 100px; width: 60px; height: 60px; border-radius: 50%; box-shadow: rgba(0,0,0,0.1); background: url('../images/contents/ico_next1.png') no-repeat center; }
+    .item2 .swiper-button-next::after{ content: '';  }
+    .item2 .swiper-button-next::before{ content: attr(data-index); position: absolute; top: -60px; left: 80px; font-size: 35px; font-weight: 600; color: #fff; }
+    .item2 .swiper-button-next .nextTit{ position: absolute; bottom: 0; left: 80px; font-size: 20px; font-weight: 600; color: #fff; line-height: 1.4; white-space: nowrap;  }
+    .item2 .swiper-button-next .nextTit::after{ content: attr(data-en); display: block; font-size: 15px; font-weight: 500; }
+    /* 애니메이션 */
+    .item2 .paging{ opacity: 0; position: relative; top: 30px; }
+    .item2 .tit{ opacity: 0; position: relative; top: 30px; }
+    .item2 .txt{ opacity: 0; position: relative; top: 30px; }
+    .item2 .btnSquare{ opacity: 0; position: relative; top: 30px; }
+    .item2 .swiper-slide-active .paging{ animation: fadeUp 1s 0.0s both;  }
+    .item2 .swiper-slide-active .tit{ animation: fadeUp 1s 0.3s both;  }
+    .item2 .swiper-slide-active .txt{ animation: fadeUp 1s 0.6s both;  }
+    .item2 .swiper-slide-active .btnSquare{ animation: fadeUp 1s 0.9s both;  }
+    .item2 .swiper-slide-active .bgBox .innerTxt span{ transform: translate(0, 0); } 
+    @keyframes fadeUp{
+        from{ opacity: 0; top: 30px; }
+        to{ opacity: 1; top: 0; }
+    }
+
 	</style>
 </head>
 <body>
 <p class="hdtext">* swiper.js 를 활용하여 여러예제를 담았습니다 *</p>
-<div class="item item1">
+<section class="item item1">
     <h4 class="title">1. 슬라이드 프로그레스</h4>
 	<div class="itemCont">
         <div class="slideContainer swiper-container">
@@ -123,7 +160,88 @@
             }
         });
     </script>
-</div><!-- .item1 -->
+</section><!-- .item1 -->
+
+
+<section class="item item2">
+    <h4 class="title">2. Bg연동 슬라이드</h4>
+    <div class="itemCont">
+        <div class="bg bgcst"></div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" data-tit="과일 플레이팅" data-en="health care food">
+                    <div class="txtBox">
+                        <p class="paging"> <strong>01</strong> / 02 </p>
+                        <h4 class="tit">과일 플레이팅</h4>
+                    </div>
+                    <div class="bgBox" style="background-image:url('../images/contents/vis_bg1.jpg');">
+                        <p class="topTxt">Fruit</p>
+                        <h2 class="innerTxt">
+                            <span>
+                                Fruit<br />
+                                Plating
+                            </span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="swiper-slide" data-tit="바베큐 플레이팅" data-en="Health mask">
+                    <div class="txtBox">
+                        <p class="paging"> <strong>02</strong> / 02 </p>
+                        <h4 class="tit">바베큐 플레이팅</h4>
+                    </div>
+                    <div class="bgBox" style="background-image:url('../images/contents/vis_bg2.jpg');">
+                        <p class="topTxt">BBQ</p>
+                        <h2 class="innerTxt">
+                            <span>
+                                BBQ<br />
+                                Plating
+                            </span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next">
+                <h4 class="nextTit"></h4>
+            </div>
+        </div>
+    </div>
+    <script>
+        var item2Slide = new Swiper(".item2 .swiper-container", {
+            slideNextClass: 'swiper-slide-next',
+            slidePrevClass: 'swiper-slide-prev',
+            navigation: {
+                nextEl: ".item2 .swiper-button-next",
+                prevEl: ".item2 .swiper-button-prev",
+            },
+            loop: true,
+            loopedSlides: 5,
+            on: {
+                slideChangeTransitionEnd: function(){
+                    // 뒤에 bg변경
+                    if( $(window).width() > 1024 ){
+                        var currentStyle = $('.item2 .swiper-slide-active .bgBox').attr('style');
+                        var currentBg = currentStyle.split("'")[1];
+                        $('.item2 .itemCont>.bg').attr('style','background-image:url('+currentBg+')');
+                    }else{
+                        var currentStyle = $('.item2 .swiper-slide-active .bgBox').attr('style');
+                        var currentBg = currentStyle.split("'")[1];
+                        var currentBgM = currentBg.split("/");
+                        $('.item2 .itemCont>.bg').attr('style','background-image:url(/'+currentBgM[1]+'/'+currentBgM[2]+'/m_'+currentBgM[3]+')');
+                    }
+                    // btn next 변경
+                    var totalSlides = $('.item2 .swiper-slide:not(.swiper-slide-duplicate)').length;
+                    var currentIdx = this.realIndex + 2;
+                    var currentTit = $('.item2 .swiper-slide-next').attr('data-tit');
+                    var currentEn = $('.item2 .swiper-slide-next').attr('data-en');
+                    if( currentIdx > totalSlides ){ currentIdx = 1 }
+                    $('.item2 .swiper-button-next').attr('data-index','0'+currentIdx);
+                    $('.item2 .swiper-button-next .nextTit').text(currentTit).attr('data-en',currentEn);
+                }
+            }
+        });
+    </script>
+</section><!-- .item2 -->
 
 
 </body>
