@@ -16,6 +16,21 @@
         font-weight: normal;
         font-style: normal;
     }
+    /*reset*/
+    html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td, 
+    del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, 
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, 
+    dl, dt, dd, ol, ul, li, fieldset, form, label, legend {margin:0; padding:0;}
+    i{ font-style: normal; }
+    ul{list-style:none;}
+    ol{list-style-position:inside;}
+    img, fieldset{border:none; vertical-align:middle;}
+    a {color:#000;text-decoration:none;}
+    a:hover {text-decoration:none;}
+    a:active {text-decoration:none;}
+    em{font-style:normal;}
+    caption, legend, .labelx{left:-9999px; font-size:0; position:absolute; display:none;}
+    table{width:100%;border-collapse:collapse;table-layout:fixed;}
     *{ box-sizing: border-box; }
     body{ font-family: 'KOTRA_BOLD-Bold'; }
     .hdtext{ margin: 20px auto; font-size: 17px; font-weight: 300; text-align: center; }
@@ -91,7 +106,6 @@
     }
 
     /* item3 */
-    /*** visual ***/
     .item3{ padding: 2.6vw; }
     .item3 *{ transition: all 0.3s; }
     .item3 .itemCont{ max-width: 100%; height: 900px; }
@@ -112,14 +126,25 @@
     .item3 .swiper-slide .videoBox:hover{ transform: translateY(-10px); box-shadow: 0 50px 100px rgba(0,0,0,0.4); } 
     .item3 .swiper-slide .videoBox:hover::after{ opacity: 0; }
     .item3 .swiper-slide .videoBox:hover::before{ margin-top: -10px; }
-    /* visual ani */
-    /* .item3 .swiper-slide{ opacity: 0; left: 300px; }
-    .item3 .swiper-slide:nth-child(1){ transition: all 0.3s, opacity 0.5s 0.0s, left 0.5s 0.0s; }
-    .item3 .swiper-slide:nth-child(2){ transition: all 0.3s, opacity 0.5s 0.2s, left 0.5s 0.2s; }
-    .item3 .swiper-slide:nth-child(3){ transition: all 0.3s, opacity 0.5s 0.4s, left 0.5s 0.4s; }
-    .item3 .swiper-slide:nth-child(4){ transition: all 0.3s, opacity 0.5s 0.6s, left 0.5s 0.6s; }
-    .item3 .swiper-slide:nth-child(5){ transition: all 0.3s, opacity 0.5s 0.8s, left 0.5s 0.8s; }
-    .pageVisual .visual .swiper-slide{ opacity: 1; left: 0; } */
+
+    /* item4 */
+    .item4 *{ transition: all 0.3s; }
+    .item4 .itemCont{ position: relative; }
+    .item4 .contLeft{ position: absolute; top: 0; left: 0; width: calc((100% - 80px) * 0.35); min-width: 300px; height: calc(100vh - 100px); padding-top: 50px; text-align: center; border-right: 1px solid #ddd; transition: all 0.0s; }
+    .item4 .contLeftInner{ overflow: hidden; height: 100%; }
+    .item4 .contLeftList{ overflow: visible; }
+    .item4 .contLeftList .swiper-wrapper{ transition-timing-function: linear; }
+    .item4 .contLeftList .swiper-slide{ padding: 10%; padding-top: 0; } 
+    .item4 .contLeftList .swiper-slide a{ display: block; position: relative; transition: all 0.5s; transition-timing-function: linear; }
+    .item4 .contLeftList .swiper-slide .imgBox{ overflow: hidden; border-radius: 20px; }
+    .item4 .contLeftList .swiper-slide .imgBox img{ width: 100%; background-color: #fafafa; }
+    .item4 .contLeftList .swiper-slide .txtBox{ position: absolute; bottom: 0; left: 0; padding: 0 20px 40px; text-align: left; }
+    .item4 .contLeftList .swiper-slide .txt{ font-size: 15px; font-weight: 400; color: #fff; margin-bottom: 5px; }
+    .item4 .contLeftList .swiper-slide .tit{ font-size: 25px; font-weight: 500; color: #fff; }
+    .item4 .contLeftList .swiper-slide:hover .imgBox{ }
+    .item4 .contLeftList .swiper-slide:hover img{ transform: scale(1.05); }
+    .item4 .contLeftList .swiper-slide-prev a{ transform: translateY( calc(var(--slide-top) * 1px) ); }
+    .item4 .contRight{ width: calc((100% - 80px) * 0.65); margin-left: calc((100% - 80px) * 0.35); padding: 100px 50px 50px; }
 
 	</style>
 </head>
@@ -318,7 +343,95 @@
             },
         });
     </script>
-</section><!-- .item2 -->
+</section><!-- .item3 -->
+
+
+<section class="item item4">
+    <h4 class="title">4. 좌측 픽스 카드 슬라이드</h4>
+    <div class="itemCont">
+        <div class="contLeft">
+            <div class="contLeftInner">
+                <div class="contLeftList swiper-container">
+                    <ul class="swiper-wrapper">
+                        <li class="swiper-slide">
+                            <a href="javascript:alert('준비중 입니다.')">
+                                <div class="imgBox">
+                                    <img src="../images/contents/card_blank.png" alt="" class="bg bga" style="background-image:url('../images/contents/card_img1.jpg')">
+                                </div>
+                                <div class="txtBox">
+                                    <p class="txt">이작품은 무엇일까?</p>
+                                    <h6 class="tit">세기의 미술작품 타이틀 작성</h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="javascript:alert('준비중 입니다.')">
+                                <div class="imgBox">
+                                    <img src="../images/contents/card_blank.png" alt="" class="bg bga" style="background-image:url('../images/contents/card_img2.jpg')">
+                                </div>
+                                <div class="txtBox">
+                                    <p class="txt">두근두근 그림세계</p>
+                                    <h6 class="tit">그림관려 제목 입력</h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="javascript:alert('준비중 입니다.')">
+                                <div class="imgBox">
+                                    <img src="../images/contents/card_blank.png" alt="" class="bg bga" style="background-image:url('../images/contents/card_img3.jpg')">
+                                </div>
+                                <div class="txtBox">
+                                    <p class="txt">이작품은 무엇일까?</p>
+                                    <h6 class="tit">세기의 미술작품 타이틀 작성</h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a href="javascript:alert('준비중 입니다.')">
+                                <div class="imgBox">
+                                    <img src="../images/contents/card_blank.png" alt="" class="bg bga" style="background-image:url('../images/contents/card_img4.jpg')">
+                                </div>
+                                <div class="txtBox">
+                                    <p class="txt">두근두근 그림세계</p>
+                                    <h6 class="tit">그림관려 제목 입력</h6>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .contLeft -->
+        <div class="contRight">
+            <p class="txt">좌측 영역에서 스크롤 해보세요 :-)</p>
+        </div><!-- .contRight -->
+    </div>
+    <script>
+	// 좌측 height 값 지정 & 슬라이드
+	var slideHeight = $('.item4 .contLeftList .imgBox').outerHeight();
+	$('.item4 .contLeftList').css('height', (slideHeight + 50));
+	var authorSwiper = new Swiper(".item4 .contLeftList", {
+        direction: "vertical",
+		speed: 500,
+		loop: true,
+		//slidePrevClass: 'swiper-slide-prev',
+		mousewheel: {
+			invert: true,
+		},
+	});
+	var docStyle = document.documentElement.style;
+	docStyle.setProperty('--slide-top', (slideHeight + 50) );
+
+	// 하단쪽에서 fix 정지
+	/* var mainAuthorBttFix = $('.main_partners').offset().top - $('.main_author').outerHeight();
+	$(window).scroll(function(){
+		if( $(document).scrollTop() > mainAuthorBttFix ){
+			$('.main_author').css({'position': 'absolute', 'top': (mainAuthorBttFix + 100) });
+		}else{
+			$('.main_author').css({'position': 'fixed', 'top': '100px' });
+		}
+	}); */
+    </script>
+</section><!-- .item4 -->
 
 
 </body>
