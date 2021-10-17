@@ -60,8 +60,8 @@
     .item1 .slideNav .swiper-button-next{ z-index: 3; top: 0; right: 0; margin-top: 0; }  
     .item1 .slideNav .swiper-button-prev::after,
     .item1 .slideNav .swiper-button-next::after{ font-size: 20px; font-weight: 600; color: #fff;  }
-    .item1 .slideNav .swiper-button-prev:hover{ background: url('/images/common/ico_arwCircle_c.png') no-repeat center; }
-    .item1 .slideNav .swiper-button-next:hover{ background: url('/images/common/ico_arwCircle_c.png') no-repeat center; }
+    .item1 .slideNav .swiper-button-prev:hover{ background: url('../images/common/ico_arwCircle_c.png') no-repeat center; }
+    .item1 .slideNav .swiper-button-next:hover{ background: url('../images/common/ico_arwCircle_c.png') no-repeat center; }
     .item1 .slideNav .swiper-pagination{ z-index: -1; top: 10px; left: 50%; transform: translateX(-50%); font-size: 17px; font-weight: 500; color: #fff; }
     @keyframes slideProgress{
         from{ width: 0; }
@@ -146,6 +146,18 @@
     .item4 .contLeftList .swiper-slide:hover img{ transform: scale(1.05); }
     .item4 .contLeftList .swiper-slide-prev a{ transform: translateY( calc(var(--slide-top) * 1px) ); }
     .item4 .contRight{ width: calc((100% - 80px) * 0.60); margin-left: calc((100% - 80px) * 0.40); padding: 100px 50px 50px; }
+
+    /* item5 */
+    .item5{ overflow: hidden; }
+    .item5 .itemCont{display: flex; align-items: center;}
+    .item5 .swiper-container{ width: calc(100% + 110px); height: 400px; margin-left: -110px; padding-right: 110px; }
+    .item5 .swiper-slide{ position: relative; width: 180px; height: 180px; transition: width 0.5s 0.5s, height 0.5s 0.5s; } 
+    .item5 .swiper-slide a{ display: block; position: relative; width: 180px; height: 180px; margin: auto; margin-top: 110px; }
+    .item5 .swiper-slide .img_w{ overflow: hidden; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; border-radius: 50%; transition: width 0.5s 0s, height 0.5s 0s;  }
+    .item5 .swiper-slide .txt{ position: absolute; top: 50%; left: 0; transform: translate(0,-50%); width: 100%; font-size: 20px; font-weight: 600; color: #fff; text-align: center;  transition: font-size 0.0s 0.0s; }
+    .item5 .swiper-slide-active{ width: 400px; height: 400px; }
+    .item5 .swiper-slide-active .img_w{ width: 400px; height: 400px; transition: width 0.5s 1.0s, height 0.5s 1.0s; }
+    .item5 .swiper-slide-active .txt{ font-size: 42px; transition: font-size 0.5s 0.5s; } 
 
 	</style>
 </head>
@@ -422,18 +434,139 @@
 	});
 	var docStyle = document.documentElement.style;
 	docStyle.setProperty('--slide-top', (slideHeight + 50) );
-
-	// 하단쪽에서 fix 정지
-	/* var mainAuthorBttFix = $('.main_partners').offset().top - $('.main_author').outerHeight();
-	$(window).scroll(function(){
-		if( $(document).scrollTop() > mainAuthorBttFix ){
-			$('.main_author').css({'position': 'absolute', 'top': (mainAuthorBttFix + 100) });
-		}else{
-			$('.main_author').css({'position': 'fixed', 'top': '100px' });
-		}
-	}); */
     </script>
 </section><!-- .item4 -->
+
+
+<section class="item item5">
+    <h4 class="title">5. cd 형태 롤링 슬라이드</h4>
+    <div class="itemCont">
+        <div class="swiper-container">
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img1.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">one</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img2.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">two</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img3.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">three</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img4.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">four</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img2.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">five</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img1.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">six</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img2.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">seven</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img3.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">eight</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="swiper-slide">
+                    <a href="javascript:alert('준비중 입니다.')">
+                        <div class="img_w bga" style="background-image: url('../images/contents/card_img4.jpg')">
+                            <img src="../images/common/blank_square.png" alt="" />
+                            <div class="txt">
+                                <span class="ihr">nine</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var swiper = new Swiper('.item5 .swiper-container', {
+            speed: 1200,
+            slidesPerView: 'auto',
+            spaceBetween: 40,
+            centeredSlides: true,
+            autoplay: {
+            delay: 2000,
+            },
+            loop: true,
+            loopedSlides: 8,
+            slideToClickedSlide: true,
+            slidePrevClass: 'swiper-slide-prev',
+            slideNextClass: 'swiper-slide-next',   
+            breakpoints: {
+                769: {
+                    spaceBetween: 20,
+                },
+                1025: {
+                    spaceBetween: 30,
+                },
+                1600: {
+                    spaceBetween: 40,
+                }
+            }
+        });
+        swiper.on('slideChange', function () {
+            swiper.updateSize ();
+        });
+    </script>
+</section><!-- .item5 -->
 
 
 </body>
