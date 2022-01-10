@@ -11,36 +11,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>카카오맵 길찾기 animation</title>
-
-	<style>
-	@font-face {
-		font-family: 'GmarketSansBold';
-		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
-		font-weight: normal;
-		font-style: normal;
-	}
-	@font-face {
-		font-family: 'GmarketSansMedium';
-		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-		font-weight: normal;
-		font-style: normal;
-	}
-	html, body{ margin: 0; padding: 0;}
-	.container{ display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; }
-	.contents{ width: 100%; max-width: 1000px; }
-	.title{ margin: 0; margin-bottom: 30px; font-family: 'GmarketSansBold'; font-size: 40px; font-weight: 600; color: #333; text-align: center; }
-	.text{ margin: 0; margin-top: 20px; font-family: 'GmarketSansMedium'; font-size: 17px; font-weight: 400; color: #333; text-align: center; }
-	.text a{ color: #ee2b2b; }
-	.text a:hover{ color: #b60005; }
-	.mapBox{ width: 100%; padding: 50px 50px 20px; box-sizing: border-box; background: #fff; border-radius: 30px; box-shadow: 0 20px 80px rgba(0,0,0,0.15); }
-	.mapBox .root_daum_roughmap{ width: 100%; height: 100%;  }
-	.mapBox .root_daum_roughmap .wrap_map{ height: 100%; }
-	.mapBox #daum-maps-shape-0{ stroke-dasharray: var(--pathLength); stroke-dashoffset: var(--pathLength); animation: strokeAni 3s both linear; }
-	@keyframes strokeAni{
-		0%{ stroke-dashoffset: var(--pathLength); }
-		100%{ stroke-dashoffset: 0; }
-	}
-	</style>
 </head>
 <body>
 	<div class="container">
@@ -49,17 +19,50 @@
 			<div class="mapBox">
 				<div id="map" style="width:100%;height:400px;"></div>
 				<p class="text">지도 좌표값은 <a href="https://tablog.neocities.org/keywordposition.html" target="_blank">요기</a>에서 찾으시면됩니닷 😉</p>
+				<p class="text">카카오 지도 api 관련해서 더 많은 내용은 <a href="https://apis.map.kakao.com/web/sample/" target="_blank">공식사이트 데모</a> 를 확인해주새요. </p>
 			</div>
 		</div>
 	</div>
 
-<!-- *** 스크립트 *** -->
+<!-- ◼️◼️◼️◼️◼️◼️◼️◼️◼️ 스타일 ◼️◼️◼️◼️◼️◼️◼️◼️◼️ -->
+<style>
+@font-face {
+	font-family: 'GmarketSansBold';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+html, body{ margin: 0; padding: 0;}
+.container{ display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; }
+.contents{ width: 100%; max-width: 1000px; }
+.title{ margin: 0; margin-bottom: 30px; font-family: 'GmarketSansBold'; font-size: 40px; font-weight: 600; color: #333; text-align: center; }
+.text{ margin: 0; margin-top: 20px; font-family: 'GmarketSansMedium'; font-size: 17px; font-weight: 400; color: #333; text-align: center; }
+.text a{ color: #ee2b2b; }
+.text a:hover{ color: #b60005; }
+.mapBox{ width: 100%; padding: 50px 50px 20px; box-sizing: border-box; background: #fff; border-radius: 30px; box-shadow: 0 20px 80px rgba(0,0,0,0.15); }
+.mapBox .root_daum_roughmap{ width: 100%; height: 100%;  }
+.mapBox .root_daum_roughmap .wrap_map{ height: 100%; }
+.mapBox #daum-maps-shape-0{ stroke-dasharray: var(--pathLength); stroke-dashoffset: var(--pathLength); animation: strokeAni 3s both linear; }
+@keyframes strokeAni{
+	0%{ stroke-dashoffset: var(--pathLength); }
+	100%{ stroke-dashoffset: 0; }
+}
+</style>
+
+
+<!-- ◼️◼️◼️◼️◼️◼️◼️◼️◼️ 스크립트 ◼️◼️◼️◼️◼️◼️◼️◼️◼️ -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- 카카오맵 api 키값입니다 - 등록된 사이트만 나오기때문에 타사이트에는 키값 새로 발급받아 사용하셔야합니다! -->
 <script type='text/javascript' src='https://dapi.kakao.com/v2/maps/sdk.js?appkey=297e821b791e2e81f41380d14646c212'></script>
 <script>
-
-// 반응형에 따라 지도 크기 조정을 위한 스크립트 추가
+/* ◼️◼️◼️◼ 지도 세팅 ◼️◼️◼️◼ */
+// 반응형에 따라 지도 크기 조정을 위한 if문  -- 지도 표시할 div / 중심좌표 / 확대레벨 / 확대축소 컨트롤
 if( window.innerWidth > 1024 ){ 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
@@ -74,11 +77,10 @@ if( window.innerWidth > 1024 ){
 			// draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소를 막으려면 draggable: false 옵션을 추가하세요
 			level: 3 // 지도의 확대 레벨
 		};
-
 } 
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		
+
 // 버튼 클릭에 따라 지도 확대, 축소 기능을 막거나 풀고 싶은 경우에는 map.setZoomable 함수를 사용합니다
 map.setZoomable(true);
 
@@ -99,8 +101,7 @@ var marker = new kakao.maps.Marker({
 marker.setMap(map);
 
 
-
-/*** 지도 길찾기 라인 ***/
+/* ◼️◼️◼️◼ 지도 길찾기 라인 ◼️◼️◼️◼ */
 // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
 var linePath = [
 	new kakao.maps.LatLng(37.55625008458588, 126.92258859822104),
@@ -120,10 +121,10 @@ var polyline = new kakao.maps.Polyline({
 	strokeStyle: 'solid' // 선의 스타일입니다
 });
 
-	
 // 지도에 선을 표시합니다 
 polyline.setMap(map); 
 
+// 지도 선 애니메이션을 위한 docStyle 지정
 var docStyle = document.documentElement.style;
 var pathLength = document.querySelector('#daum-maps-shape-0').getTotalLength();
 docStyle.setProperty('--pathLength', pathLength);
