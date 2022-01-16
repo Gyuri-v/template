@@ -16,10 +16,17 @@
 	<div class="container">
 		<div class="contents">
 			<h2 class="title"> 🚩 카카오맵 길찾기 애니메이션</h2>
-			<div class="mapBox">
+			<div class="contBox">
 				<div id="map" style="width:100%;height:400px;"></div>
 				<p class="text">지도 좌표값은 <a href="https://tablog.neocities.org/keywordposition.html" target="_blank">요기</a>에서 찾으시면됩니닷 😉</p>
 				<p class="text">카카오 지도 api 관련해서 더 많은 내용은 <a href="https://apis.map.kakao.com/web/sample/" target="_blank">공식사이트 데모</a> 를 확인해주새요. </p>
+			</div>
+		</div>
+		<div class="contents">
+			<h2 class="title"> 🔑 카카오 API 키 발급받기 </h2>
+			<div class="contBox">
+				<p class="text">공유폴더 경로</p>
+				<p class="text">블로그 링크</p>
 			</div>
 		</div>
 	</div>
@@ -39,16 +46,18 @@
 	font-style: normal;
 }
 html, body{ margin: 0; padding: 0;}
-.container{ display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; }
-.contents{ width: 100%; max-width: 1000px; }
+.container{ display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; padding: 50px 0; }
+.contents{ width: 100%; max-width: 1000px; padding: 50px 0; }
 .title{ margin: 0; margin-bottom: 30px; font-family: 'GmarketSansBold'; font-size: 40px; font-weight: 600; color: #333; text-align: center; }
+.subtitle{ margin: 0; margin-bottom: 20px; font-family: 'GmarketSansMedium'; font-size: 28px; font-weight: 600; color: #333; text-align: center; }
 .text{ margin: 0; margin-top: 20px; font-family: 'GmarketSansMedium'; font-size: 17px; font-weight: 400; color: #333; text-align: center; }
-.text a{ color: #ee2b2b; }
-.text a:hover{ color: #b60005; }
-.mapBox{ width: 100%; padding: 50px 50px 20px; box-sizing: border-box; background: #fff; border-radius: 30px; box-shadow: 0 20px 80px rgba(0,0,0,0.15); }
-.mapBox .root_daum_roughmap{ width: 100%; height: 100%;  }
-.mapBox .root_daum_roughmap .wrap_map{ height: 100%; }
-.mapBox #daum-maps-shape-0{ stroke-dasharray: var(--pathLength); stroke-dashoffset: var(--pathLength); animation: strokeAni 3s both linear; }
+.text a{ color: #2b6fee; }
+.text a:hover{ color: #0049b6; }
+.tal{ text-align: left !important; }
+.contBox{ width: 100%; padding: 50px; box-sizing: border-box; background: #fff; border-radius: 30px; box-shadow: 0 20px 80px rgba(0,0,0,0.15); }
+.contBox .root_daum_roughmap{ width: 100%; height: 100%;  }
+.contBox .root_daum_roughmap .wrap_map{ height: 100%; }
+.contBox #daum-maps-shape-0{ stroke-dasharray: var(--pathLength); stroke-dashoffset: var(--pathLength); animation: strokeAni 3s both linear; }
 @keyframes strokeAni{
 	0%{ stroke-dashoffset: var(--pathLength); }
 	100%{ stroke-dashoffset: 0; }
