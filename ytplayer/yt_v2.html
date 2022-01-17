@@ -1,45 +1,164 @@
 <!doctype html>
 <html lang="ko">
+<!--
+******************************
+
+유튜브 동영상 제어 - YTPlayer 템플릿입니다.
+
+******************************
+-->
 <head>
 	<meta charset="UTF-8">
-	<title>YTPlayer2-확장.유튜브내용 가져오기</title>
+	<title>YTPlayer2.유튜브내용 가져오기</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.8/jquery.mb.YTPlayer.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.8/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="wrap">
+	<div class="container">
 		<div class="contents">
-            <h1 class="title">📚 YTPlayer2-확장.유튜브내용 가져오기</h1>
-			<div class="videoWrap">
-				<div id="bgndVideo" class="player"></div>
-			</div>
-			<div id="videoData" class="videoData">
-				<div class="dida"></div>
-			</div>
-			<div id="debug" style="display: none">
-				<h2 style="color: #FFFFFF; text-align: left">Events console: </h2>
-				<div id="eventListener"></div>
+            <h1 class="title">📚 YTPlayer.유튜브내용 가져오기</h1>
+			<div class="contBox">
+				<div class="videoWrap">
+					<div id="bgndVideo" class="player"></div>
+				</div>
+				<div id="videoData" class="videoData">
+					<div class="dida"></div>
+				</div>
+				<div id="debug" style="display: none">
+					<h2 style="color: #FFFFFF; text-align: left">Events console: </h2>
+					<div id="eventListener"></div>
+				</div>
 			</div>
 		</div>
 	</div>	
 </body>
+
+
+<!-- ◼️◼️◼️◼️◼️◼️◼️◼️◼️ 스타일 ◼️◼️◼️◼️◼️◼️◼️◼️◼️ -->
 <style>
-    
-	.wrap{ padding: 100px 0  }
-	.contents{ display: block; max-width: 760px; margin: 0 auto; padding: 4vw; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); }
-    .title{ margin-bottom: 20px; font-size: 24px; font-weight: 600; color: #000; }
-	.videoWrap{ width: 100%; }
-	.videoData{ width: 100%; margin-top: 20px; padding-left: 0; min-height: 250px; }
-	.videoTit{ font-size: 20px; } 
-	.videoChannel{ font-size: 14px; color: cornflowerblue; }
-	.videoDesc{ font-size: 15px; }
+@font-face {
+	font-family: 'GmarketSansBold';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 50px 0;
+}
+
+.contents {
+    width: 100%;
+    max-width: 1000px;
+    padding: 50px 0;
+}
+
+.title {
+    margin: 0;
+    margin-bottom: 30px;
+    font-family: 'GmarketSansBold';
+    font-size: 40px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.subtitle {
+    margin: 0;
+    margin-bottom: 20px;
+    font-family: 'GmarketSansMedium';
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.text {
+    margin: 0;
+    margin-top: 20px;
+    font-family: 'GmarketSansMedium';
+    font-size: 17px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+
+.text a {
+    color: #2b6fee;
+}
+
+.text a:hover {
+    color: #0049b6;
+}
+
+.col {
+    color: #2b6fee;
+}
+
+.tal {
+    text-align: left !important;
+}
+
+.contBox {
+    width: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.15);
+}
+
+.videoWrap {
+    width: 100%;
+}
+
+.videoData {
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 0;
+    min-height: 50px;
+    font-family: 'GmarketSansMedium';
+}
+
+.videoTit {
+    font-size: 20px;
+}
+
+.videoChannel {
+    font-size: 14px;
+    color: cornflowerblue;
+}
+
+.videoDesc {
+    font-size: 15px;
+}
 </style>
+
+
+
+<!-- ◼️◼️◼️◼️◼️◼️◼️◼️◼️ 스크립트 ◼️◼️◼️◼️◼️◼️◼️◼️◼️ -->
 <script>
 $(document).ready(function(){
     // yt player
-	// 유튜브 api app key -- ip 제한 완료 
+	// 유튜브 api app key -- ip 제한 완료
     jQuery.mbYTPlayer.apiKey = "AIzaSyD0DhWavSkpQ3m1KFCo43TJUYkoJua7kF8";
     var myPlayer;
     jQuery(function () {
@@ -76,7 +195,7 @@ $(document).ready(function(){
 
             if(!e.prop.title)
                 return;
-            $(".dida").html("<p class='videoTit'>" + e.prop.title + "</p> <p class='videoChannel'>@" + e.prop.channelTitle + "</p> <p class='videoDesc'>" + e.prop.description.replace(/\n/g, "<br/>") + "</p>");
+            $(".dida").html("<p class='videoTit'>제목 : " + e.prop.title + "</p> <p class='videoChannel'>채널 : @" + e.prop.channelTitle + "</p> <p class='videoDesc'> 내용 : " + e.prop.description.replace(/\n/g, "<br/>") + "</p>");
             $("#videoData").show();
 
             YTPConsole.append("******************************");
