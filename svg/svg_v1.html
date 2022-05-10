@@ -409,6 +409,36 @@
         })();
     	</script>
     </div>
+
+		<div class="wrap">
+				<h4 class="title">8. 웨이브 / svg filter </h4>
+				<div class="svg_item svg_item07">
+					<style>
+						.svg_item07 .item-wave{ width: 100%; height: 30%; background: #ddd; filter: url(#imgWave); }
+						.svg_item07 .svg-effect{ position: absolute; top: 0; left: 0; }
+					</style>
+					<div class="item-wave">
+
+					</div>
+					<svg class="svg-effect">
+						<defs>
+								<filter id="imgWave" x="0%" y="0%" width="100%" height="100%">
+									<feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="1" result="warp" id="imgWaveBulence">
+										<animate attributeName="baseFrequency" values="0.01 0.003; 0.005 0.01; 0.01 0.003;" dur="5s" repeatCount="indefinite" />
+									</feTurbulence>
+									<feOffset dx="0" dy="0" result="warpOffset"></feOffset>
+									<feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="100" in="SourceGraphic" in2="warpOffset"></feDisplacementMap>
+								</filter>
+						</defs> 
+					</svg>
+
+					<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+					<script>
+						gsap.to(document.querySelector('#imgWaveBulence'), 0, {attr: { baseFrequency: '0.01 0.003' }}, 0);
+						gsap.to(document.querySelector('#imgWaveBulence'), 1, {attr: { baseFrequency: '0 0' }}, 0);
+					</script> -->
+				</div>
+		</div>
 </div>
 
 
@@ -418,7 +448,6 @@
         $(window).scroll(function(){
             $('.svg_item').each(function(){
                 var itemTop = $(this).offset().top - 200;
-                console.log(itemTop);
 				if( $(document).scrollTop() > itemTop ){
 					$(this).addClass('active');
 				} 
